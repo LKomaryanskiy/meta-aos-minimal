@@ -9,6 +9,7 @@ AOS_UM_PLUGINS ?= "\
     sshmodule \
     testmodule \
     filemodule \
+    overlaymodule \
 "
 
 inherit systemd
@@ -60,9 +61,6 @@ do_install_append() {
 
     install -d ${D}${systemd_system_unitdir}
     install -m 0644 ${WORKDIR}/aos-updatemanager.service ${D}${systemd_system_unitdir}/aos-updatemanager.service
-
-    install -d ${D}/var/aos/updatemanager/crypt
-    install -m 0644 ${S}/src/${GO_IMPORT}/data/*.pem ${D}/var/aos/updatemanager/crypt
 }
 
 addtask configure_modules after do_install before do_populate_sysroot
